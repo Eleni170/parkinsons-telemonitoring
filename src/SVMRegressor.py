@@ -4,12 +4,11 @@ from sklearn.svm import SVR
 class SVMRegressor:
 
     def __init__(self, c, gamma):
-        self.svm_classifier = None
         self.C = c
         self.gamma = gamma
+        self.svm_classifier = SVR(C=self.C, gamma=self.gamma)
 
     def fit(self, x_train, t_train):
-        self.svm_classifier = SVR(self.C, gamma=self.gamma)
         self.svm_classifier.fit(x_train, t_train)
 
     def predict(self, x_test):

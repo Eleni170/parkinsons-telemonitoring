@@ -31,7 +31,7 @@ class Application:
             predict_test = svm_regressor.predict(x_test)
             mean_squared_error_avg = mean_squared_error_avg + mean_squared_error(t_test, predict_test)
         mean_squared_error_avg = mean_squared_error_avg / number_of_folds
-        print("Mean squared error of cross validation with " + number_of_folds + " folds is" + mean_squared_error_avg)
+        print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
 
 
 if __name__ == '__main__':
