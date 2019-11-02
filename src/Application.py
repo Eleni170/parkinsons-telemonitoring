@@ -5,6 +5,8 @@ from sklearn.model_selection import train_test_split
 from src.Checks import Checks
 from src.SVMRegressor import SVMRegressor
 
+import matplotlib.pyplot as plt
+
 
 class Application:
 
@@ -32,6 +34,16 @@ class Application:
             mean_squared_error_avg = mean_squared_error_avg + mean_squared_error(t_test, predict_test)
         mean_squared_error_avg = mean_squared_error_avg / number_of_folds
         print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        plt.title('Support Vector Regression')
+        plot0 = plt.plot(t_test, label='Test values')
+        plot1 = plt.plot(predict_test, 'r.', label='Predicted values')
+        ax.set_xlabel('Samples')
+        ax.set_ylabel('Output')
+        plt.legend(handles=[plot0[0], plot1[0]])
+        plt.show()
 
 
 if __name__ == '__main__':
