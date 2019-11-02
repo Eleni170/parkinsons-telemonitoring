@@ -1,14 +1,14 @@
 from sklearn.svm import SVR
 
 
-class SVM:
+class SVMRegressor:
 
     def __init__(self, c, gamma):
         self.svm_classifier = None
         self.C = c
         self.gamma = gamma
 
-    def classify(self, x_train, t_train):
+    def fit(self, x_train, t_train):
         self.svm_classifier = SVR(self.C, gamma=self.gamma)
         self.svm_classifier.fit(x_train, t_train)
 
