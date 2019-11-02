@@ -1,5 +1,4 @@
 from pandas import read_csv
-from pip._vendor.distlib.compat import raw_input
 import numpy as np
 
 
@@ -12,7 +11,7 @@ class Application:
         while True:
             try:
 
-                number = int(raw_input(phrase))
+                number = int(input(phrase))
                 if number <= 0:
                     continue
                 return number
@@ -22,7 +21,7 @@ class Application:
     def check_if_correct_gamma(self, phrase):
         while True:
             try:
-                step = float(raw_input(phrase))
+                step = float(input(phrase))
                 return step
             except ValueError:
                 continue
