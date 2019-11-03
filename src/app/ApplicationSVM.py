@@ -18,9 +18,15 @@ class ApplicationSVM:
         return
 
     def main_svm_motor_updrs(self):
+        max_iter = Checks().check_if_valid_max_iter("Set max_iter: ")
+        tol = Checks().check_if_valid_tol("Set tolerance: ")
         c = Checks().check_if_valid_c("Set c: ")
-        gamma = Checks().check_if_valid_gamma("Set gamma: ")
-        svm_regressor = SVMRegressor(c, gamma)
+        kernel = Checks().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
+        if kernel in ["rbf", "poly", "sigmoid"]:
+            gamma = Checks().check_if_valid_gamma("Set gamma: ")
+        else:
+            gamma = 'auto'
+        svm_regressor = SVMRegressor(c, gamma, kernel, tol, max_iter)
 
         number_of_folds = 9
         mean_squared_error_avg = 0
@@ -39,9 +45,15 @@ class ApplicationSVM:
         self.plot_results_svm('motor_updrs', t_test, predict_test)
 
     def main_svm_total_updrs(self):
+        max_iter = Checks().check_if_valid_max_iter("Set max_iter: ")
+        tol = Checks().check_if_valid_tol("Set tolerance: ")
         c = Checks().check_if_valid_c("Set c: ")
-        gamma = Checks().check_if_valid_gamma("Set gamma: ")
-        svm_regressor = SVMRegressor(c, gamma)
+        kernel = Checks().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
+        if kernel in ["rbf", "poly", "sigmoid"]:
+            gamma = Checks().check_if_valid_gamma("Set gamma: ")
+        else:
+            gamma = 'auto'
+        svm_regressor = SVMRegressor(c, gamma, kernel, tol, max_iter)
 
         number_of_folds = 9
         mean_squared_error_avg = 0
