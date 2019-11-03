@@ -23,13 +23,17 @@ class ApplicationKNN:
 
         number_of_folds = 9
         mean_squared_error_avg = 0
+        training_time_avg = 0
         for _ in range(number_of_folds):
             x_train, x_test, t_train, t_test = train_test_split(self.x, self.t_motor_updrs, test_size=0.4)
-            knn_regressor.fit(x_train, t_train)
+            training_time_avg = training_time_avg + knn_regressor.fit(x_train, t_train)
             predict_test = knn_regressor.predict(x_test)
             mean_squared_error_avg = mean_squared_error_avg + mean_squared_error(t_test, predict_test)
         mean_squared_error_avg = mean_squared_error_avg / number_of_folds
+        training_time_avg = training_time_avg / number_of_folds
+
         print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
+        print('Time in average regression takes: ' + str(training_time_avg) + ' seconds.')
 
         self.plot_results_knn('motor_updrs', t_test, predict_test)
 
@@ -39,13 +43,17 @@ class ApplicationKNN:
 
         number_of_folds = 9
         mean_squared_error_avg = 0
+        training_time_avg = 0
         for _ in range(number_of_folds):
             x_train, x_test, t_train, t_test = train_test_split(self.x, self.t_total_updrs, test_size=0.4)
-            knn_regressor.fit(x_train, t_train)
+            training_time_avg = training_time_avg + knn_regressor.fit(x_train, t_train)
             predict_test = knn_regressor.predict(x_test)
             mean_squared_error_avg = mean_squared_error_avg + mean_squared_error(t_test, predict_test)
         mean_squared_error_avg = mean_squared_error_avg / number_of_folds
+        training_time_avg = training_time_avg / number_of_folds
+
         print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
+        print('Time in average regression takes: ' + str(training_time_avg) + ' seconds.')
 
         self.plot_results_knn('total_updrs', t_test, predict_test)
 
