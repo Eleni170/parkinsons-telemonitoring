@@ -3,7 +3,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
-from checks.Checks import Checks
+from checks.ChecksSVM import ChecksSVM
 from svm.SVMRegressor import SVMRegressor
 
 
@@ -18,12 +18,12 @@ class ApplicationSVM:
         return
 
     def main_svm_motor_updrs(self):
-        max_iter = Checks().check_if_valid_max_iter("Set max_iter: ")
-        tol = Checks().check_if_valid_tol("Set tolerance: ")
-        c = Checks().check_if_valid_c("Set c: ")
-        kernel = Checks().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
+        max_iter = ChecksSVM().check_if_valid_max_iter("Set max_iter: ")
+        tol = ChecksSVM().check_if_valid_tol("Set tolerance: ")
+        c = ChecksSVM().check_if_valid_c("Set c: ")
+        kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
         if kernel in ["rbf", "poly", "sigmoid"]:
-            gamma = Checks().check_if_valid_gamma("Set gamma: ")
+            gamma = ChecksSVM().check_if_valid_gamma("Set gamma: ")
         else:
             gamma = 'auto'
         svm_regressor = SVMRegressor(c, gamma, kernel, tol, max_iter)
@@ -45,12 +45,12 @@ class ApplicationSVM:
         self.plot_results_svm('motor_updrs', t_test, predict_test)
 
     def main_svm_total_updrs(self):
-        max_iter = Checks().check_if_valid_max_iter("Set max_iter: ")
-        tol = Checks().check_if_valid_tol("Set tolerance: ")
-        c = Checks().check_if_valid_c("Set c: ")
-        kernel = Checks().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
+        max_iter = ChecksSVM().check_if_valid_max_iter("Set max_iter: ")
+        tol = ChecksSVM().check_if_valid_tol("Set tolerance: ")
+        c = ChecksSVM().check_if_valid_c("Set c: ")
+        kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
         if kernel in ["rbf", "poly", "sigmoid"]:
-            gamma = Checks().check_if_valid_gamma("Set gamma: ")
+            gamma = ChecksSVM().check_if_valid_gamma("Set gamma: ")
         else:
             gamma = 'auto'
         svm_regressor = SVMRegressor(c, gamma, kernel, tol, max_iter)

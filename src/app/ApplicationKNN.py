@@ -3,7 +3,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
-from checks.Checks import Checks
+from checks.ChecksKNN import ChecksKNN
 from knn.KNNRegressor import KNNRegressor
 
 
@@ -18,7 +18,7 @@ class ApplicationKNN:
         return
 
     def main_knn_motor_updrs(self):
-        k = Checks().check_if_valid_k("Set k: ")
+        k = ChecksKNN().check_if_valid_k("Set k: ")
         knn_regressor = KNNRegressor(k)
 
         number_of_folds = 9
@@ -38,7 +38,7 @@ class ApplicationKNN:
         self.plot_results_knn('motor_updrs', t_test, predict_test)
 
     def main_knn_total_updrs(self):
-        k = Checks().check_if_valid_k("Set k: ")
+        k = ChecksKNN().check_if_valid_k("Set k: ")
         knn_regressor = KNNRegressor(k)
 
         number_of_folds = 9

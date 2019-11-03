@@ -1,4 +1,4 @@
-class Checks:
+class ChecksSVM:
 
     def __init__(self):
         return
@@ -18,16 +18,6 @@ class Checks:
             try:
                 step = float(input(phrase))
                 return step
-            except ValueError:
-                continue
-
-    def check_if_valid_k(self, phrase):
-        while True:
-            try:
-                number = int(input(phrase))
-                if number <= 0:
-                    continue
-                return number
             except ValueError:
                 continue
 
