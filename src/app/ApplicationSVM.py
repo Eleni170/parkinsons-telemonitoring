@@ -1,5 +1,6 @@
 from pandas import read_csv
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
@@ -30,16 +31,20 @@ class ApplicationSVM:
 
         number_of_folds = 9
         mean_squared_error_avg = 0
+        mean_absolute_error_avg = 0
         training_time_avg = 0
         for _ in range(number_of_folds):
             x_train, x_test, t_train, t_test = train_test_split(self.x, self.t_motor_updrs, test_size=0.4)
             training_time_avg = training_time_avg + svm_regressor.fit(x_train, t_train)
             predict_test = svm_regressor.predict(x_test)
             mean_squared_error_avg = mean_squared_error_avg + mean_squared_error(t_test, predict_test)
+            mean_absolute_error_avg = mean_absolute_error_avg + mean_absolute_error(t_test, predict_test)
         mean_squared_error_avg = mean_squared_error_avg / number_of_folds
+        mean_absolute_error_avg = mean_absolute_error_avg / number_of_folds
         training_time_avg = training_time_avg / number_of_folds
 
         print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
+        print("MAE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_absolute_error_avg))
         print('Time in average regression takes: ' + str(training_time_avg) + ' seconds.')
 
         self.plot_results_svm('motor_updrs', t_test, predict_test)
@@ -57,16 +62,20 @@ class ApplicationSVM:
 
         number_of_folds = 9
         mean_squared_error_avg = 0
+        mean_absolute_error_avg = 0
         training_time_avg = 0
         for _ in range(number_of_folds):
             x_train, x_test, t_train, t_test = train_test_split(self.x, self.t_total_updrs, test_size=0.4)
             training_time_avg = training_time_avg + svm_regressor.fit(x_train, t_train)
             predict_test = svm_regressor.predict(x_test)
             mean_squared_error_avg = mean_squared_error_avg + mean_squared_error(t_test, predict_test)
+            mean_absolute_error_avg = mean_absolute_error_avg + mean_absolute_error(t_test, predict_test)
         mean_squared_error_avg = mean_squared_error_avg / number_of_folds
+        mean_absolute_error_avg = mean_absolute_error_avg / number_of_folds
         training_time_avg = training_time_avg / number_of_folds
 
         print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
+        print("MAE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_absolute_error_avg))
         print('Time in average regression takes: ' + str(training_time_avg) + ' seconds.')
 
         self.plot_results_svm('total_updrs', t_test, predict_test)
