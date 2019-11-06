@@ -75,7 +75,7 @@ class ApplicationSVM:
         fig = plt.figure()
         ax = fig.add_subplot(111)
         plt.title('Support Vector Regression (' + plt_title_updrs + ')')
-        plot0 = plt.plot(t_test, label='Test values')
+        plot0 = plt.plot(t_test, 'b.', label='Test values')
         plot1 = plt.plot(predict_test, 'r.', label='Predicted values')
         ax.set_xlabel('Samples')
         ax.set_ylabel('Output')
