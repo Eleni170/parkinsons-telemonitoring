@@ -4,13 +4,13 @@ import timeit
 
 class SVMRegressor:
 
-    def __init__(self, c, gamma, kernel, tol, max_iter):
+    def __init__(self, c, gamma, kernel, epsilon, max_iter):
         self.C = c
         self.gamma = gamma
         self.kernel = kernel
-        self.tol = tol
+        self.epsilon = epsilon
         self.max_iter = max_iter
-        self.svm_regressor = SVR(C=self.C, gamma=self.gamma, kernel=self.kernel, tol=tol, max_iter=self.max_iter)
+        self.svm_regressor = SVR(C=self.C, gamma=self.gamma, kernel=self.kernel, epsilon=epsilon, max_iter=self.max_iter)
 
     def fit(self, x_train, t_train):
         start = timeit.default_timer()

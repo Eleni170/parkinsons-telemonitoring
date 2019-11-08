@@ -41,7 +41,7 @@ class ChecksSVM:
             except ValueError:
                 continue
 
-    def check_if_valid_tol(self, phrase):
+    def check_if_valid_epsilon(self, phrase):
         while True:
             try:
                 step = float(input(phrase))
