@@ -25,10 +25,14 @@ class ApplicationSVM:
         epsilon = ChecksSVM().check_if_valid_epsilon("Set epsilon: ")
         c = ChecksSVM().check_if_valid_c("Set c: ")
         kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
-        if kernel is "linear":
+        if kernel == "linear":
             svm_regressor = SVMLinearRegressor(c, epsilon, max_iter)
         else:
-            svm_regressor = SVMRegressor(c, kernel, epsilon, max_iter)
+            if kernel == "poly":
+                degree = ChecksSVM().check_if_valid_degree("Set degree: ")
+            else:
+                degree = 3
+            svm_regressor = SVMRegressor(c, kernel, epsilon, degree, max_iter)
 
         number_of_folds = 9
         mean_squared_error_avg = 0
@@ -56,10 +60,14 @@ class ApplicationSVM:
         epsilon = ChecksSVM().check_if_valid_epsilon("Set epsilon: ")
         c = ChecksSVM().check_if_valid_c("Set c: ")
         kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
-        if kernel is "linear":
+        if kernel == "linear":
             svm_regressor = SVMLinearRegressor(c, epsilon, max_iter)
         else:
-            svm_regressor = SVMRegressor(c, kernel, epsilon, max_iter)
+            if kernel == "poly":
+                degree = ChecksSVM().check_if_valid_degree("Set degree: ")
+            else:
+                degree = 3
+            svm_regressor = SVMRegressor(c, kernel, epsilon, degree, max_iter)
 
         number_of_folds = 9
         mean_squared_error_avg = 0
