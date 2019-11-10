@@ -1,15 +1,14 @@
-from sklearn.svm import SVR
+from sklearn.svm import LinearSVR
 import timeit
 
 
-class SVMRegressor:
+class SVMLinearRegressor:
 
-    def __init__(self, c, kernel, epsilon, max_iter):
+    def __init__(self, c, epsilon, max_iter):
         self.C = c
-        self.kernel = kernel
         self.epsilon = epsilon
         self.max_iter = max_iter
-        self.svm_regressor = SVR(C=self.C, kernel=self.kernel, epsilon=epsilon, max_iter=self.max_iter, gamma="auto")
+        self.svm_regressor = LinearSVR(C=self.C, epsilon=self.epsilon, max_iter=self.max_iter)
 
     def fit(self, x_train, t_train):
         start = timeit.default_timer()

@@ -38,7 +38,7 @@ class ApplicationKNN:
 
         print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
         print("MAE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_absolute_error_avg))
-        print('Time in average regression takes: ' + str(training_time_avg) + ' seconds.')
+        print('Time in average training takes: ' + str(training_time_avg) + ' seconds.')
 
         self.plot_results_knn('motor_updrs', t_test, predict_test)
 
@@ -62,7 +62,7 @@ class ApplicationKNN:
 
         print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
         print("MAE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_absolute_error_avg))
-        print('Time in average regression takes: ' + str(training_time_avg) + ' seconds.')
+        print('Time in average training takes: ' + str(training_time_avg) + ' seconds.')
 
         self.plot_results_knn('total_updrs', t_test, predict_test)
 
@@ -70,7 +70,7 @@ class ApplicationKNN:
         fig = plt.figure()
         ax = fig.add_subplot(111)
         plt.title('Nearest Neighbors Regression (' + plt_title_updrs + ')')
-        plot0 = plt.plot(t_test, 'b.', label='Test values')
+        plot0 = plt.plot(t_test, label='Test values')
         plot1 = plt.plot(predict_test, 'r.', label='Predicted values')
         ax.set_xlabel('Samples')
         ax.set_ylabel('Output')
