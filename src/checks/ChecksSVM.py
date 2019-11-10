@@ -58,3 +58,11 @@ class ChecksSVM:
                 return step
             except ValueError:
                 continue
+
+    def check_if_valid_tol(self, phrase):
+        while True:
+            try:
+                step = float(input(phrase))
+                return step
+            except ValueError:
+                continue

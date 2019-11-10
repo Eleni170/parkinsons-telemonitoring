@@ -1,13 +1,12 @@
 from pandas import read_csv
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
-from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
 from checks.ChecksSVM import ChecksSVM
-from svm.SVMRegressor import SVMRegressor
 from svm.SVMLinearRegressor import SVMLinearRegressor
+from svm.SVMNonLinearRegressor import SVMNonLinearRegressor
 
 
 class ApplicationSVM:
@@ -24,15 +23,24 @@ class ApplicationSVM:
         max_iter = ChecksSVM().check_if_valid_max_iter("Set max_iter: ")
         epsilon = ChecksSVM().check_if_valid_epsilon("Set epsilon: ")
         c = ChecksSVM().check_if_valid_c("Set c: ")
+        tol = ChecksSVM().check_if_valid_tol("Set tolerance: ")
         kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
+
         if kernel == "linear":
-            svm_regressor = SVMLinearRegressor(c, epsilon, max_iter)
+            svm_regressor = SVMLinearRegressor(c, epsilon, tol, max_iter)
         else:
+
             if kernel == "poly":
                 degree = ChecksSVM().check_if_valid_degree("Set degree: ")
             else:
                 degree = 3
-            svm_regressor = SVMRegressor(c, kernel, epsilon, degree, max_iter)
+
+            if kernel in ["poly", "rbf", "sigmoid"]:
+                gamma = ChecksSVM().check_if_valid_gamma("Set gamma: ")
+            else:
+                gamma = "auto"
+
+            svm_regressor = SVMNonLinearRegressor(c, kernel, gamma, epsilon, tol, degree, max_iter)
 
         number_of_folds = 9
         mean_squared_error_avg = 0
@@ -59,15 +67,23 @@ class ApplicationSVM:
         max_iter = ChecksSVM().check_if_valid_max_iter("Set max_iter: ")
         epsilon = ChecksSVM().check_if_valid_epsilon("Set epsilon: ")
         c = ChecksSVM().check_if_valid_c("Set c: ")
+        tol = ChecksSVM().check_if_valid_tol("Set tolerance: ")
         kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
         if kernel == "linear":
-            svm_regressor = SVMLinearRegressor(c, epsilon, max_iter)
+            svm_regressor = SVMLinearRegressor(c, epsilon, tol, max_iter)
         else:
+
             if kernel == "poly":
                 degree = ChecksSVM().check_if_valid_degree("Set degree: ")
             else:
                 degree = 3
-            svm_regressor = SVMRegressor(c, kernel, epsilon, degree, max_iter)
+
+            if kernel in ["poly", "rbf", "sigmoid"]:
+                gamma = ChecksSVM().check_if_valid_gamma("Set gamma: ")
+            else:
+                gamma = "auto"
+
+            svm_regressor = SVMNonLinearRegressor(c, kernel, gamma, epsilon, tol, degree, max_iter)
 
         number_of_folds = 9
         mean_squared_error_avg = 0
@@ -89,19 +105,12 @@ class ApplicationSVM:
 
         self.plot_results_svm('total_updrs', t_test, predict_test)
 
-    def preprocessing(self):
-        self.x = StandardScaler().fit_transform(self.x)
-        self.t_motor_updrs = StandardScaler().fit_transform(self.t_motor_updrs.reshape(-1, 1))
-        self.t_motor_updrs = self.t_motor_updrs.reshape(-1, )
-        self.t_total_updrs = StandardScaler().fit_transform(self.t_total_updrs.reshape(-1, 1))
-        self.t_total_updrs = self.t_total_updrs.reshape(-1, )
-
     def plot_results_svm(self, plt_title_updrs, t_test, predict_test):
         fig = plt.figure()
         ax = fig.add_subplot(111)
         plt.title('Support Vector Regression (' + plt_title_updrs + ')')
-        plot0 = plt.plot(t_test, label='Test values')
-        plot1 = plt.plot(predict_test, 'r.', label='Predicted values')
+        plot0 = plt.plot(t_test, 'r.', label='Test values')
+        plot1 = plt.plot(predict_test, label='Predicted values')
         ax.set_xlabel('Samples')
         ax.set_ylabel('Output')
         plt.legend(handles=[plot0[0], plot1[0]])

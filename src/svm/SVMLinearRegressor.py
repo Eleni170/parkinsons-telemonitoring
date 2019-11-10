@@ -4,11 +4,12 @@ import timeit
 
 class SVMLinearRegressor:
 
-    def __init__(self, c, epsilon, max_iter):
+    def __init__(self, c, epsilon, tol, max_iter):
         self.C = c
         self.epsilon = epsilon
+        self.tol = tol
         self.max_iter = max_iter
-        self.svm_regressor = LinearSVR(C=self.C, epsilon=self.epsilon, max_iter=self.max_iter)
+        self.svm_regressor = LinearSVR(C=self.C, epsilon=self.epsilon, tol=self.tol, dual=False, max_iter=self.max_iter)
 
     def fit(self, x_train, t_train):
         start = timeit.default_timer()
