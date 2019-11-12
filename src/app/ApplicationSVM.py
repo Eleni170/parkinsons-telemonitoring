@@ -43,7 +43,7 @@ class ApplicationSVM:
 
             svm_regressor = SVMNonLinearRegressor(c, kernel, gamma, epsilon, tol, degree, max_iter)
 
-        number_of_folds = 9
+        number_of_folds = 5
         mean_squared_error_avg = 0
         mean_absolute_error_avg = 0
         training_time_avg = 0
@@ -86,7 +86,7 @@ class ApplicationSVM:
 
             svm_regressor = SVMNonLinearRegressor(c, kernel, gamma, epsilon, tol, degree, max_iter)
 
-        number_of_folds = 9
+        number_of_folds = 5
         mean_squared_error_avg = 0
         mean_absolute_error_avg = 0
         training_time_avg = 0

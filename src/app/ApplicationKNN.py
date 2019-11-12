@@ -22,7 +22,7 @@ class ApplicationKNN:
         k = ChecksKNN().check_if_valid_k("Set k: ")
         knn_regressor = KNNRegressor(k)
 
-        number_of_folds = 9
+        number_of_folds = 5
         mean_squared_error_avg = 0
         mean_absolute_error_avg = 0
         training_time_avg = 0
@@ -46,7 +46,7 @@ class ApplicationKNN:
         k = ChecksKNN().check_if_valid_k("Set k: ")
         knn_regressor = KNNRegressor(k)
 
-        number_of_folds = 9
+        number_of_folds = 5
         mean_squared_error_avg = 0
         mean_absolute_error_avg = 0
         training_time_avg = 0
