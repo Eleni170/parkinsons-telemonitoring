@@ -25,7 +25,7 @@ class ChecksSVM:
         while True:
             try:
                 kernel = input(phrase)
-                if kernel not in ["linear", "poly", "rbf", "sigmoid", "precomputed"]:
+                if kernel not in ["linear", "poly", "rbf", "sigmoid"]:
                     continue
                 return kernel
             except ValueError:

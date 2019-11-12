@@ -1,4 +1,5 @@
 from pandas import read_csv
+from sklearn.decomposition import PCA
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
@@ -24,7 +25,7 @@ class ApplicationSVM:
         epsilon = ChecksSVM().check_if_valid_epsilon("Set epsilon: ")
         c = ChecksSVM().check_if_valid_c("Set c: ")
         tol = ChecksSVM().check_if_valid_tol("Set tolerance: ")
-        kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
+        kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid): ")
 
         if kernel == "linear":
             svm_regressor = SVMLinearRegressor(c, epsilon, tol, max_iter)
@@ -68,7 +69,7 @@ class ApplicationSVM:
         epsilon = ChecksSVM().check_if_valid_epsilon("Set epsilon: ")
         c = ChecksSVM().check_if_valid_c("Set c: ")
         tol = ChecksSVM().check_if_valid_tol("Set tolerance: ")
-        kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid, precomputed): ")
+        kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid): ")
         if kernel == "linear":
             svm_regressor = SVMLinearRegressor(c, epsilon, tol, max_iter)
         else:
@@ -104,6 +105,14 @@ class ApplicationSVM:
         print('Time in average training takes: ' + str(training_time_avg) + ' seconds.')
 
         self.plot_results_svm('total_updrs', t_test, predict_test)
+
+    def principal_component_analysis(self):
+        number_of_components = 1
+        self.x = PCA(n_components=number_of_components).fit_transform(self.x)
+        self.t_motor_updrs = PCA(n_components=number_of_components).fit_transform(self.t_motor_updrs.reshape(-1, 1))
+        self.t_total_updrs = PCA(n_components=number_of_components).fit_transform(self.t_total_updrs.reshape(-1, 1))
+        self.t_motor_updrs = self.t_motor_updrs.reshape(-1, )
+        self.t_total_updrs = self.t_total_updrs.reshape(-1, )
 
     def plot_results_svm(self, plt_title_updrs, t_test, predict_test):
         fig = plt.figure()
