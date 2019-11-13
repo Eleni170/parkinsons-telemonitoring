@@ -19,8 +19,7 @@ class ApplicationSVM:
         self.t_motor_updrs = data[:, (features_start_index - 2)]
         self.t_total_updrs = data[:, (features_start_index - 1)]
 
-    def main_svm_motor_updrs(self):
-
+    def svm_construction(self):
         max_iter = ChecksSVM().check_if_valid_max_iter("Set max_iter: ")
         epsilon = ChecksSVM().check_if_valid_epsilon("Set epsilon: ")
         c = ChecksSVM().check_if_valid_c("Set c: ")
@@ -42,6 +41,12 @@ class ApplicationSVM:
                 gamma = "auto"
 
             svm_regressor = SVMNonLinearRegressor(c, kernel, gamma, epsilon, tol, degree, max_iter)
+
+        return svm_regressor
+
+    def main_svm_motor_updrs(self):
+
+        svm_regressor = self.svm_construction()
 
         number_of_folds = 5
         mean_squared_error_avg = 0
@@ -65,26 +70,7 @@ class ApplicationSVM:
 
     def main_svm_total_updrs(self):
 
-        max_iter = ChecksSVM().check_if_valid_max_iter("Set max_iter: ")
-        epsilon = ChecksSVM().check_if_valid_epsilon("Set epsilon: ")
-        c = ChecksSVM().check_if_valid_c("Set c: ")
-        tol = ChecksSVM().check_if_valid_tol("Set tolerance: ")
-        kernel = ChecksSVM().check_if_valid_kernel("Set kernel (linear, poly, rbf, sigmoid): ")
-        if kernel == "linear":
-            svm_regressor = SVMLinearRegressor(c, epsilon, tol, max_iter)
-        else:
-
-            if kernel == "poly":
-                degree = ChecksSVM().check_if_valid_degree("Set degree: ")
-            else:
-                degree = 3
-
-            if kernel in ["poly", "rbf", "sigmoid"]:
-                gamma = ChecksSVM().check_if_valid_gamma("Set gamma: ")
-            else:
-                gamma = "auto"
-
-            svm_regressor = SVMNonLinearRegressor(c, kernel, gamma, epsilon, tol, degree, max_iter)
+        svm_regressor = self.svm_construction()
 
         number_of_folds = 5
         mean_squared_error_avg = 0
