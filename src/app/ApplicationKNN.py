@@ -38,7 +38,7 @@ class ApplicationKNN:
 
         print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
         print("MAE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_absolute_error_avg))
-        print('Time in average training takes: ' + str(training_time_avg) + ' seconds.')
+        print("Training time takes in average: " + str(training_time_avg) + "seconds.")
 
         self.plot_results_knn('motor_updrs', t_test, predict_test)
 
@@ -62,7 +62,33 @@ class ApplicationKNN:
 
         print("MSE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_squared_error_avg))
         print("MAE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_absolute_error_avg))
-        print('Time in average training takes: ' + str(training_time_avg) + ' seconds.')
+        print("Training time takes in average: " + str(training_time_avg) + "seconds.")
+
+        self.plot_results_knn('total_updrs', t_test, predict_test)
+
+    def final_knn_motor_updrs(self):
+
+        k = ChecksKNN().check_if_valid_k("Set k: ")
+        knn_regressor = KNNRegressor(k)
+
+        x_train, x_test, t_train, t_test = train_test_split(self.x, self.t_motor_updrs, test_size=0.4)
+        training_time = knn_regressor.fit(x_train, t_train)
+        predict_test = knn_regressor.predict(x_test)
+
+        print("Training time took: " + str(training_time) + " seconds.")
+
+        self.plot_results_knn('motor_updrs', t_test, predict_test)
+
+    def final_knn_total_updrs(self):
+
+        k = ChecksKNN().check_if_valid_k("Set k: ")
+        knn_regressor = KNNRegressor(k)
+
+        x_train, x_test, t_train, t_test = train_test_split(self.x, self.t_total_updrs, test_size=0.4)
+        training_time = knn_regressor.fit(x_train, t_train)
+        predict_test = knn_regressor.predict(x_test)
+
+        print("Training time took: " + str(training_time) + " seconds.")
 
         self.plot_results_knn('total_updrs', t_test, predict_test)
 
