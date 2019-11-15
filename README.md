@@ -1,1 +1,1 @@
-# svm-parkinsons-telemonitoring
+# parkinsons-telemonitoring
