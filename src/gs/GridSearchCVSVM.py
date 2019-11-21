@@ -10,13 +10,6 @@ from sklearn.model_selection import train_test_split
 
 class GridSearchCVSVM:
 
-    """
-        Replaces template placeholder with values.
-
-        :param data_path: formatted date to display
-        :param features_start_index: priority number
-        :returns: formatted string
-    """
     def __init__(self, data_path, features_start_index):
         data = read_csv(data_path, header=0).values
         number_of_attributes = len(data[0])
@@ -34,8 +27,8 @@ class GridSearchCVSVM:
 
         number_of_folds = 5
         param_grid = {
-            'C': [0.1, 1, 100, 1000],
-            'gamma': [0.0001, 0.001, 0.005, 0.1, 1, 3, 5]
+            'C': [0.03125, 0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32],
+            'gamma': [0.03125, 0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32]
         }
 
         gsc = GridSearchCV(
@@ -52,22 +45,24 @@ class GridSearchCVSVM:
         x_train, x_test, t_train, t_test = train_test_split(self.x, self.t_motor_updrs, test_size=0.4)
         model = best_svr.fit(x_train, t_train)
         predict_test = best_svr.predict(x_test)
+        number_of_support_vectors = len(best_svr.support_vectors_)
 
         mean_squared_error_value = mean_squared_error(t_test, predict_test)
         mean_absolute_error_value = mean_absolute_error(t_test, predict_test)
 
         print("Smallest MSE: " + str(mean_squared_error_value))
         print("Smallest MAE: " + str(mean_absolute_error_value))
+        print("Number of Support Vectors: "+str(number_of_support_vectors))
         print("Best model parameters: " + str(model))
 
-        self.plot_results_svm('total_updrs', t_test, predict_test)
+        self.plot_results_svm('motor_updrs', t_test, predict_test)
 
     def gs_svm_total_updrs(self):
 
         number_of_folds = 5
         param_grid = {
-            'C': [0.1, 1, 100, 1000],
-            'gamma': [0.0001, 0.001, 0.005, 0.1, 1, 3, 5]
+            'C': [0.03125, 0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32],
+            'gamma': [0.03125, 0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32]
         }
 
         gsc = GridSearchCV(
@@ -84,12 +79,14 @@ class GridSearchCVSVM:
         x_train, x_test, t_train, t_test = train_test_split(self.x, self.t_total_updrs, test_size=0.4)
         model = best_svr.fit(x_train, t_train)
         predict_test = best_svr.predict(x_test)
+        number_of_support_vectors = len(best_svr.support_vectors_)
 
         mean_squared_error_value = mean_squared_error(t_test, predict_test)
         mean_absolute_error_value = mean_absolute_error(t_test, predict_test)
 
         print("Smallest MSE: " + str(mean_squared_error_value))
         print("Smallest MAE: " + str(mean_absolute_error_value))
+        print("Number of Support Vectors: " + str(number_of_support_vectors))
         print("Best model parameters: " + str(model))
 
         self.plot_results_svm('total_updrs', t_test, predict_test)

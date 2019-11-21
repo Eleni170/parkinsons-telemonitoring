@@ -26,7 +26,7 @@ class GridSearchCVKNN:
     def gs_knn_motor_updrs(self):
         number_of_folds = 5
         param_grid = {
-            'n_neighbors': [1, 2, 3, 4, 5]
+            'n_neighbors': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         }
 
         gsc = GridSearchCV(
@@ -56,7 +56,7 @@ class GridSearchCVKNN:
     def gs_knn_total_updrs(self):
         number_of_folds = 5
         param_grid = {
-            'n_neighbors': [1, 2, 3, 4, 5]
+            'n_neighbors': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         }
 
         gsc = GridSearchCV(

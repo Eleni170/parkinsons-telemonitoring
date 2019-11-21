@@ -33,7 +33,7 @@ class CrossValidationKNN:
         mean_absolute_error_value = 0
         training_time = 0
 
-        kf = KFold(n_splits=number_of_folds)
+        kf = KFold(n_splits=number_of_folds, shuffle=True)
 
         for train_index, test_index in kf.split(self.x):
             x_train, x_test = self.x[train_index], self.x[test_index]
@@ -62,7 +62,7 @@ class CrossValidationKNN:
         mean_absolute_error_value = 0
         training_time = 0
 
-        kf = KFold(n_splits=number_of_folds)
+        kf = KFold(n_splits=number_of_folds, shuffle=True)
 
         for train_index, test_index in kf.split(self.x):
             x_train, x_test = self.x[train_index], self.x[test_index]
@@ -82,13 +82,3 @@ class CrossValidationKNN:
         print("MAE of cross validation with " + str(number_of_folds) + " folds is " + str(mean_absolute_error_value))
         print("Training time takes in average: " + str(training_time) + " seconds.")
 
-    def plot_results_knn(self, plt_title_updrs, t_test, predict_test):
-        fig = plt.figure()
-        ax = fig.add_subplot(111)
-        plt.title('Nearest Neighbors Regression (' + plt_title_updrs + ')')
-        plot0 = plt.plot(t_test, 'r.', label='Test values')
-        plot1 = plt.plot(predict_test, label='Predicted values')
-        ax.set_xlabel('Samples')
-        ax.set_ylabel('Output')
-        plt.legend(handles=[plot0[0], plot1[0]])
-        plt.show()

@@ -6,7 +6,7 @@ class ChecksSVM:
     def check_if_valid_c(self, phrase):
         while True:
             try:
-                number = int(input(phrase))
+                number = float(input(phrase))
                 if number <= 0:
                     continue
                 return number
@@ -41,15 +41,15 @@ class ChecksSVM:
             except ValueError:
                 continue
 
-    def check_if_valid_max_iter(self, phrase):
-        while True:
-            try:
-                number = int(input(phrase))
-                if number <= 0:
-                    continue
-                return number
-            except ValueError:
-                continue
+    # def check_if_valid_max_iter(self, phrase):
+    #     while True:
+    #         try:
+    #             number = int(input(phrase))
+    #             if number <= 0:
+    #                 continue
+    #             return number
+    #         except ValueError:
+    #             continue
 
     def check_if_valid_epsilon(self, phrase):
         while True:
@@ -59,10 +59,10 @@ class ChecksSVM:
             except ValueError:
                 continue
 
-    def check_if_valid_tol(self, phrase):
-        while True:
-            try:
-                step = float(input(phrase))
-                return step
-            except ValueError:
-                continue
+    # def check_if_valid_tol(self, phrase):
+    #     while True:
+    #         try:
+    #             step = float(input(phrase))
+    #             return step
+    #         except ValueError:
+    #             continue
