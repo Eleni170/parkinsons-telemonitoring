@@ -1,1 +1,3 @@
 # parkinsons-telemonitoring
+
+This repository consists of SVM regressors that predict the symptoms of Parkinson's disease in patients, taking into account some characteristics of the vocal cords of the individuals. The goal of the models is to estimate the value of 2 columns from the used dataset, motor and total UPDRS, two scales that indicate the degree of severity of the symptoms. For that purpose, 5-fold cross validation was used and different parameters of the models were modified in every run, printing the average training time, the average number of support vectors, the mean squared error and the mean absolute error. Also, grid search was applied to the SVMs, in order to find the values that best fit for C and gamma.
